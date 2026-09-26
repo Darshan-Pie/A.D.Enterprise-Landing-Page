@@ -11,7 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "A.D. ENTERPRISES",
   description: "Manufacturer of LV Switch Boards & LT Bus Duct",
-  robots: "noindex, nofollow", // QR landing pages are typically private/direct-only
+  robots: "noindex, nofollow",
   openGraph: {
     title: "A.D. ENTERPRISES",
     description: "Manufacturer of LV Switch Boards & LT Bus Duct",
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
         {children}
       </body>

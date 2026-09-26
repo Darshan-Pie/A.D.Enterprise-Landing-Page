@@ -1,7 +1,7 @@
 "use client";
 
 // ============================================================
-// A.D. ENTERPRISES - Business Card Replica Landing Page
+// A.D. ENTERPRISES - Mobile-Optimized Landing Page
 // ============================================================
 
 import { useState } from "react";
@@ -19,9 +19,7 @@ const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=A.D.+EN
 const ADDRESS = "32, 33, 38, 39 Shyam Industrial Hub, Kujad, Bakrol-Gatrad Rd, Bakrol Bujrang, Gujarat 382433";
 // -----------------------------------------------------------
 
-// ============================================================
-// WhatsApp inline SVG
-// ============================================================
+// --- Native SVG Icons (Eliminates External Network Dependencies) ---
 function WhatsAppIcon({ size = 20, color = "currentColor" }: { size?: number; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
@@ -30,34 +28,51 @@ function WhatsAppIcon({ size = 20, color = "currentColor" }: { size?: number; co
   );
 }
 
+function GmailIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24">
+      <path fill="#4285F4" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6z" />
+      <path fill="#34A853" d="M22 6l-10 7L2 6v12h2V8l8 5.5L20 8v10h2V6z" />
+      <path fill="#EA4335" d="M2 6l10 7L22 6" />
+    </svg>
+  );
+}
+
+function GoogleMapsIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <path fill="#34A853" d="M12 2C7.58 2 4 5.58 4 10c0 5.25 7 12 8 12s8-6.75 8-12c0-4.42-3.58-8-8-8z" />
+      <circle cx="12" cy="10" r="3" fill="#FFFFFF" />
+    </svg>
+  );
+}
+
 // ============================================================
-// Geometric Corner Banners (Mobile Optimized)
+// Geometric Corner Banners
 // ============================================================
 function CornerBanners() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Top Left Red Ribbon */}
       <div
         className="absolute bg-[#C8102E]"
         style={{
-          width: "180px",
-          height: "24px",
-          top: "12px",
-          left: "-55px",
+          width: "160px",
+          height: "22px",
+          top: "10px",
+          left: "-50px",
           transform: "rotate(-45deg)",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
+          boxShadow: "0 2px 8px rgba(0,0,0,0.12)"
         }}
       />
-      {/* Bottom Right Red Ribbon */}
       <div
         className="absolute bg-[#C8102E]"
         style={{
-          width: "180px",
-          height: "24px",
-          bottom: "12px",
-          right: "-55px",
+          width: "160px",
+          height: "22px",
+          bottom: "10px",
+          right: "-50px",
           transform: "rotate(-45deg)",
-          boxShadow: "0 -2px 8px rgba(0,0,0,0.15)"
+          boxShadow: "0 -2px 8px rgba(0,0,0,0.12)"
         }}
       />
     </div>
@@ -69,18 +84,12 @@ function CornerBanners() {
 // ============================================================
 function Header() {
   return (
-    <header className="text-center pt-16 sm:pt-20 pb-4 px-4 relative z-10 flex flex-col items-center">
-      <h1 className="font-bold mb-2 w-full" style={{
-        fontSize: "clamp(1.4rem, 6vw, 2.5rem)",
-        letterSpacing: "0.1em",
-        lineHeight: 1.2,
-        color: "#C8102E",
-        fontFamily: "'BankGothic', 'Bank Gothic', sans-serif"
-      }}>
+    <header className="text-center pt-14 sm:pt-18 pb-4 px-4 relative z-10 flex flex-col items-center">
+      <h1 className="font-bold mb-2 w-full text-red-700 tracking-wide text-2xl sm:text-4xl uppercase">
         {COMPANY_NAME}
       </h1>
 
-      <p className="font-bold text-slate-900 uppercase px-2 tracking-[0.15em] text-[10px] sm:text-[11px] max-w-sm" style={{ lineHeight: 1.5 }}>
+      <p className="font-bold text-slate-900 uppercase px-2 tracking-[0.14em] text-[10px] sm:text-[11px] max-w-xs sm:max-w-sm leading-relaxed">
         {TAGLINE}
       </p>
     </header>
@@ -98,7 +107,7 @@ function CertificationBanner() {
   ];
 
   return (
-    <div className="w-full bg-[#C8102E] text-white py-4 px-4 shadow-md mb-6 relative z-10">
+    <div className="w-full bg-[#C8102E] text-white py-3.5 px-4 shadow-md mb-6 relative z-10">
       <div className="flex flex-col gap-2 max-w-md mx-auto items-center text-center">
         {certs.map((text, i) => (
           <div key={i} className="flex items-center justify-center gap-2">
@@ -114,48 +123,18 @@ function CertificationBanner() {
 }
 
 // ============================================================
-// Shared Hover Helpers for Action Cards
-// ============================================================
-function useHover(hoverStyle: React.CSSProperties, baseStyle: React.CSSProperties) {
-  return {
-    onMouseEnter: (e: React.MouseEvent<HTMLElement>) => Object.assign((e.currentTarget as HTMLElement).style, hoverStyle),
-    onMouseLeave: (e: React.MouseEvent<HTMLElement>) => Object.assign((e.currentTarget as HTMLElement).style, baseStyle),
-    onMouseDown: (e: React.MouseEvent<HTMLElement>) => { (e.currentTarget as HTMLElement).style.transform = "scale(0.98)"; },
-    onMouseUp: (e: React.MouseEvent<HTMLElement>) => Object.assign((e.currentTarget as HTMLElement).style, hoverStyle),
-  };
-}
-
-// ============================================================
 // Action Cards Stack
 // ============================================================
 function ActionCards({ onOpenPdf }: { onOpenPdf: () => void }) {
-  const cardBase: React.CSSProperties = {
-    background: "#ffffff",
-    border: "1px solid #e2e8f0",
-    borderRadius: "12px",
-    padding: "14px 18px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    textDecoration: "none",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
-    transition: "transform 0.2s, box-shadow 0.2s, border-color 0.2s",
-    cursor: "pointer",
-  };
-
-  const hoverCard = useHover(
-    { transform: "translateY(-2px)", boxShadow: "0 6px 16px rgba(0,0,0,0.08)", borderColor: "#cbd5e1" },
-    { transform: "translateY(0)", boxShadow: "0 2px 10px rgba(0,0,0,0.04)", borderColor: "#e2e8f0" }
-  );
-
   return (
     <section className="flex flex-col gap-3.5 px-4 w-full max-w-md mx-auto mb-6 relative z-10">
-
-      {/* Card 1 - Catalogue */}
-      <button onClick={onOpenPdf} style={cardBase} {...hoverCard}>
+      {/* Catalogue Card */}
+      <button
+        onClick={onOpenPdf}
+        className="w-full bg-white border border-slate-200 rounded-xl p-3.5 flex items-center justify-between shadow-sm hover:shadow-md transition-all active:scale-[0.99]"
+      >
         <div className="flex items-center gap-3.5 text-left">
-          <div className="flex items-center justify-center w-11 h-11 rounded-full bg-[#C8102E] text-white shrink-0 shadow-md">
+          <div className="flex items-center justify-center w-11 h-11 rounded-full bg-[#C8102E] text-white shrink-0 shadow-sm">
             <FileText size={20} />
           </div>
           <div>
@@ -166,10 +145,15 @@ function ActionCards({ onOpenPdf }: { onOpenPdf: () => void }) {
         <ChevronRight size={18} className="text-slate-400" />
       </button>
 
-      {/* Card 2 - WhatsApp */}
-      <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" style={cardBase} {...hoverCard}>
+      {/* WhatsApp Card */}
+      <a
+        href={`https://wa.me/${WHATSAPP_NUMBER}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full bg-white border border-slate-200 rounded-xl p-3.5 flex items-center justify-between shadow-sm hover:shadow-md transition-all active:scale-[0.99]"
+      >
         <div className="flex items-center gap-3.5 text-left">
-          <div className="flex items-center justify-center w-11 h-11 rounded-full bg-[#25D366] text-white shrink-0 shadow-md">
+          <div className="flex items-center justify-center w-11 h-11 rounded-full bg-[#25D366] text-white shrink-0 shadow-sm">
             <WhatsAppIcon size={22} color="#ffffff" />
           </div>
           <div>
@@ -179,7 +163,6 @@ function ActionCards({ onOpenPdf }: { onOpenPdf: () => void }) {
         </div>
         <ChevronRight size={18} className="text-slate-400" />
       </a>
-
     </section>
   );
 }
@@ -192,31 +175,25 @@ function ContactGrid() {
     {
       id: "c-web",
       href: WEBSITE_URL,
-      icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chrome/chrome-original.svg" alt="Website" className="w-9 h-9 object-contain drop-shadow-sm" />,
+      icon: <Globe className="w-6 h-6 text-blue-600" />,
       label: "WEBSITE"
     },
     {
       id: "c-phone",
       href: `tel:${PHONE_NUMBER}`,
-      icon: (
-        <div className="w-9 h-9 bg-[#1A73E8] rounded-full flex items-center justify-center shadow-sm drop-shadow-sm">
-          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-          </svg>
-        </div>
-      ),
+      icon: <Phone className="w-6 h-6 text-emerald-600" />,
       label: "CALL US"
     },
     {
       id: "c-email",
       href: `mailto:${EMAIL}`,
-      icon: <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Email" className="w-9 h-9 object-contain drop-shadow-sm" />,
+      icon: <GmailIcon className="w-6 h-6" />,
       label: "EMAIL"
     },
     {
       id: "c-maps",
       href: GOOGLE_MAPS_URL,
-      icon: <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Location" className="w-9 h-9 object-contain drop-shadow-sm" />,
+      icon: <GoogleMapsIcon className="w-6 h-6" />,
       label: "LOCATION"
     },
   ];
@@ -225,8 +202,12 @@ function ContactGrid() {
     <div className="px-4 max-w-md mx-auto w-full mb-8 relative z-10">
       <div className="grid grid-cols-2 gap-3">
         {items.map((c) => (
-          <a key={c.id} href={c.href} target="_blank" rel="noopener noreferrer"
-            className="flex flex-col items-center justify-center gap-2 p-3.5 bg-white rounded-xl border border-slate-200 transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-slate-300"
+          <a
+            key={c.id}
+            href={c.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center justify-center gap-2 p-3.5 bg-white rounded-xl border border-slate-200 transition-transform active:scale-95 hover:shadow-md hover:border-slate-300"
           >
             <div className="flex items-center justify-center w-10 h-10">
               {c.icon}
@@ -257,25 +238,26 @@ function Footer() {
 }
 
 // ============================================================
-// PDF Modal Viewer
+// Mobile-Friendly PDF Modal Viewer
 // ============================================================
 function PdfModal({ onClose }: { onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-slate-900/80 backdrop-blur-sm" role="dialog" aria-modal="true">
-      {/* Top Header - Solid Crimson */}
+    <div className="fixed inset-0 z-50 flex flex-col bg-slate-900/90 backdrop-blur-sm" role="dialog" aria-modal="true">
       <div className="flex items-center justify-between p-3 bg-[#C8102E] shadow-xl shrink-0">
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="bg-white/20 p-1.5 rounded-full">
             <FileText size={16} className="text-white" />
           </div>
-          <span className="font-bold text-white text-[12px] sm:text-[13px] tracking-widest truncate" style={{ fontFamily: "'BankGothic', 'Bank Gothic', sans-serif" }}>
+          <span className="font-bold text-white text-[12px] sm:text-[13px] tracking-widest truncate">
             {COMPANY_NAME}
           </span>
         </div>
 
         <div className="flex items-center gap-2.5 shrink-0 pl-2">
           <a
-            href={CATALOGUE_URL} target="_blank" rel="noopener noreferrer"
+            href={CATALOGUE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-3 py-1.5 bg-white text-[#C8102E] rounded-md font-bold text-[10px] sm:text-[11px] shadow-sm hover:bg-slate-100 transition-colors tracking-wider"
           >
             <Download size={13} />
@@ -291,13 +273,30 @@ function PdfModal({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      {/* Viewer Body */}
-      <div className="flex-1 p-2 md:p-6 overflow-hidden">
-        <iframe
-          src={CATALOGUE_URL}
-          title="Catalogue"
-          className="w-full h-full bg-white rounded-lg shadow-2xl border-0"
-        />
+      <div className="flex-1 p-2 md:p-6 overflow-hidden flex flex-col items-center justify-center">
+        {/* Uses Object with fallback link for iOS / Android mobile browsers */}
+        <object
+          data={CATALOGUE_URL}
+          type="application/pdf"
+          className="w-full h-full bg-white rounded-lg shadow-2xl border-0 hidden sm:block"
+        >
+          <p>Your browser does not support inline PDFs.</p>
+        </object>
+
+        {/* Mobile direct fallback container */}
+        <div className="sm:hidden flex flex-col items-center justify-center text-center p-6 bg-white rounded-xl shadow-lg max-w-xs mx-auto">
+          <FileText className="w-12 h-12 text-[#C8102E] mb-3" />
+          <h3 className="text-base font-bold text-slate-900 mb-1">Product Catalogue</h3>
+          <p className="text-xs text-slate-500 mb-4">Tap below to view or download the full PDF brochure on mobile.</p>
+          <a
+            href={CATALOGUE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-2.5 px-4 bg-[#C8102E] text-white rounded-lg font-bold text-xs tracking-wider flex items-center justify-center gap-2 shadow-md"
+          >
+            <Download size={14} /> Open PDF Brochure
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -324,20 +323,6 @@ export default function Home() {
           <Footer />
         </div>
       </main>
-
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        @font-face {
-          font-family: 'BankGothic';
-          src: local('BankGothic Md BT'), local('Bank Gothic'), local('BankGothic');
-        }
-        body { 
-          margin: 0;
-          font-family: 'Inter', system-ui, -apple-system, sans-serif;
-          -webkit-font-smoothing: antialiased;
-          background-color: #f8fafc;
-        }
-      `}</style>
     </>
   );
 }
