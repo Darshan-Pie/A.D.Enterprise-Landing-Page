@@ -36,32 +36,27 @@ const ICONS = {
 // -----------------------------------------------------------
 
 // ============================================================
-// Geometric Corner Banners
+// Business Card Top & Bottom Graphic Banners
 // ============================================================
-function CornerBanners() {
+function TopCardBanner() {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      <div
-        className="absolute bg-[#C8102E]"
-        style={{
-          width: "140px",
-          height: "18px",
-          top: "10px",
-          left: "-45px",
-          transform: "rotate(-45deg)",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.12)"
-        }}
+    <div className="absolute top-0 left-0 right-0 w-full h-28 sm:h-36 pointer-events-none overflow-hidden z-0">
+      <img
+        src="/card-top.png"
+        alt=""
+        className="w-full h-full object-cover object-top opacity-95"
       />
-      <div
-        className="absolute bg-[#C8102E]"
-        style={{
-          width: "140px",
-          height: "18px",
-          bottom: "10px",
-          right: "-45px",
-          transform: "rotate(-45deg)",
-          boxShadow: "0 -2px 8px rgba(0,0,0,0.12)"
-        }}
+    </div>
+  );
+}
+
+function BottomCardBanner() {
+  return (
+    <div className="absolute bottom-0 left-0 right-0 w-full h-28 sm:h-36 pointer-events-none overflow-hidden z-0">
+      <img
+        src="/card-bottom.png"
+        alt=""
+        className="w-full h-full object-cover object-bottom opacity-95"
       />
     </div>
   );
@@ -72,9 +67,9 @@ function CornerBanners() {
 // ============================================================
 function Header() {
   return (
-    <header className="text-center pt-12 sm:pt-16 pb-4 px-4 relative z-10 flex flex-col items-center">
+    <header className="text-center pt-20 sm:pt-24 pb-4 px-6 relative z-10 flex flex-col items-center">
       <h1
-        className="font-bold mb-2 w-full uppercase"
+        className="font-bold mb-2 w-full uppercase drop-shadow-sm"
         style={{
           fontSize: "clamp(1.35rem, 5.8vw, 2.5rem)",
           letterSpacing: "0.1em",
@@ -188,7 +183,7 @@ function ActionCards({ onOpenPdf }: { onOpenPdf: () => void }) {
 }
 
 // ============================================================
-// Contact Grid (2x2 using Local PNG Icons)
+// Contact Grid
 // ============================================================
 function ContactGrid({ onSelectCall }: { onSelectCall: () => void }) {
   return (
@@ -284,7 +279,7 @@ function CallModal({ onClose }: { onClose: () => void }) {
 }
 
 // ============================================================
-// Footer (With Extra Bottom & Side Padding)
+// Footer
 // ============================================================
 function Footer() {
   return (
@@ -376,7 +371,7 @@ export default function Home() {
       {isCallModalOpen && <CallModal onClose={() => setIsCallModalOpen(false)} />}
 
       <main className="relative flex flex-col min-h-[100dvh] bg-slate-50 selection:bg-[#C8102E]/20 selection:text-[#C8102E] overflow-x-hidden">
-        <CornerBanners />
+        <TopCardBanner />
 
         <div className="flex-1 flex flex-col w-full mx-auto relative z-10">
           <Header />
@@ -385,6 +380,8 @@ export default function Home() {
           <ContactGrid onSelectCall={() => setIsCallModalOpen(true)} />
           <Footer />
         </div>
+
+        <BottomCardBanner />
       </main>
 
       <style jsx global>{`
