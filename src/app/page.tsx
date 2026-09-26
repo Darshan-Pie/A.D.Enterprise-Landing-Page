@@ -12,12 +12,14 @@ const COMPANY_NAME = "A.D. ENTERPRISES";
 const TAGLINE = "MANUFACTURER OF LV SWITCH BOARDS & LT BUS DUCT";
 const CATALOGUE_URL = "/AD_ENTERPRISES.pdf";
 
-// Dual Phone & WhatsApp Numbers
+// Dual Phone & WhatsApp Contacts
+const PHONE_1_NAME = "Akash Chhatbar";
 const PHONE_1_DISPLAY = "+91 93770 38505";
 const PHONE_1_RAW = "919377038505";
 
-const PHONE_2_DISPLAY = "+91 98250 83808";
-const PHONE_2_RAW = "919825083808";
+const PHONE_2_NAME = "Dhiren Machchhar";
+const PHONE_2_DISPLAY = "+91 78780 32927";
+const PHONE_2_RAW = "917878032927";
 
 const EMAIL = "akashet@yahoo.com";
 const WEBSITE_URL = "https://www.adenterprise.in";
@@ -141,7 +143,7 @@ function ActionCards({ onOpenPdf }: { onOpenPdf: () => void }) {
         <ChevronRight size={18} className="text-slate-400" />
       </button>
 
-      {/* WhatsApp Card with Dual Numbers */}
+      {/* WhatsApp Card with Contact Names */}
       <div className="w-full bg-white border border-slate-200 rounded-xl p-3.5 shadow-sm">
         <div className="flex items-center gap-3.5 mb-2.5">
           <div className="w-11 h-11 shrink-0 flex items-center justify-center">
@@ -153,7 +155,7 @@ function ActionCards({ onOpenPdf }: { onOpenPdf: () => void }) {
           </div>
           <div>
             <span className="block font-bold text-slate-800 text-[15px]">Connect on WhatsApp</span>
-            <span className="block font-medium text-slate-500 text-[11px] tracking-wide">Choose a contact line below</span>
+            <span className="block font-medium text-slate-500 text-[11px] tracking-wide">Select contact line to chat</span>
           </div>
         </div>
 
@@ -162,19 +164,26 @@ function ActionCards({ onOpenPdf }: { onOpenPdf: () => void }) {
             href={`https://wa.me/${PHONE_1_RAW}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 py-2 px-2 bg-emerald-50 text-emerald-800 rounded-lg text-[11px] font-bold hover:bg-emerald-100 transition-colors"
+            className="flex flex-col items-center justify-center p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 rounded-lg transition-colors text-center border border-emerald-100"
           >
-            <img src={ICONS.whatsapp} alt="" className="w-3.5 h-3.5 object-contain" />
-            {PHONE_1_DISPLAY}
+            <div className="flex items-center gap-1 mb-0.5">
+              <img src={ICONS.whatsapp} alt="" className="w-3.5 h-3.5 object-contain" />
+              <span className="text-[11px] font-bold leading-tight">{PHONE_1_NAME}</span>
+            </div>
+            <span className="text-[10px] font-medium text-emerald-700">{PHONE_1_DISPLAY}</span>
           </a>
+
           <a
             href={`https://wa.me/${PHONE_2_RAW}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 py-2 px-2 bg-emerald-50 text-emerald-800 rounded-lg text-[11px] font-bold hover:bg-emerald-100 transition-colors"
+            className="flex flex-col items-center justify-center p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 rounded-lg transition-colors text-center border border-emerald-100"
           >
-            <img src={ICONS.whatsapp} alt="" className="w-3.5 h-3.5 object-contain" />
-            {PHONE_2_DISPLAY}
+            <div className="flex items-center gap-1 mb-0.5">
+              <img src={ICONS.whatsapp} alt="" className="w-3.5 h-3.5 object-contain" />
+              <span className="text-[11px] font-bold leading-tight">{PHONE_2_NAME}</span>
+            </div>
+            <span className="text-[10px] font-medium text-emerald-700">{PHONE_2_DISPLAY}</span>
           </a>
         </div>
       </div>
@@ -236,7 +245,7 @@ function ContactGrid({ onSelectCall }: { onSelectCall: () => void }) {
 }
 
 // ============================================================
-// Call Choice Modal
+// Call Choice Modal with Contact Names
 // ============================================================
 function CallModal({ onClose }: { onClose: () => void }) {
   return (
@@ -254,7 +263,7 @@ function CallModal({ onClose }: { onClose: () => void }) {
             <img src={ICONS.phone} alt="" className="w-full h-full object-contain" />
           </div>
           <h3 className="font-bold text-slate-900 text-base">Select Contact Line</h3>
-          <p className="text-xs text-slate-500 mt-0.5">Tap a phone number to place a call</p>
+          <p className="text-xs text-slate-500 mt-0.5">Tap a person to place a direct call</p>
         </div>
 
         <div className="flex flex-col gap-2.5">
@@ -262,15 +271,26 @@ function CallModal({ onClose }: { onClose: () => void }) {
             href={`tel:${PHONE_1_DISPLAY}`}
             className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-200"
           >
-            <span className="font-bold text-xs text-slate-800">{PHONE_1_DISPLAY}</span>
-            <Phone size={14} className="text-emerald-600" />
+            <div className="text-left">
+              <span className="block font-bold text-xs text-slate-900">{PHONE_1_NAME}</span>
+              <span className="block text-[11px] text-slate-500 font-medium mt-0.5">{PHONE_1_DISPLAY}</span>
+            </div>
+            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 shrink-0 ml-2">
+              <Phone size={14} />
+            </div>
           </a>
+
           <a
             href={`tel:${PHONE_2_DISPLAY}`}
             className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-200"
           >
-            <span className="font-bold text-xs text-slate-800">{PHONE_2_DISPLAY}</span>
-            <Phone size={14} className="text-emerald-600" />
+            <div className="text-left">
+              <span className="block font-bold text-xs text-slate-900">{PHONE_2_NAME}</span>
+              <span className="block text-[11px] text-slate-500 font-medium mt-0.5">{PHONE_2_DISPLAY}</span>
+            </div>
+            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 shrink-0 ml-2">
+              <Phone size={14} />
+            </div>
           </a>
         </div>
       </div>
