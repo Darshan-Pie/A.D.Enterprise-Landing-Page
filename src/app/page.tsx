@@ -1,7 +1,7 @@
 "use client";
 
 // ============================================================
-// A.D. ENTERPRISES - Mobile-Optimized Landing Page
+// A.D. ENTERPRISES - Responsive Digital Business Card
 // ============================================================
 
 import { useState } from "react";
@@ -36,11 +36,11 @@ const ICONS = {
 // -----------------------------------------------------------
 
 // ============================================================
-// Business Card Top & Bottom Graphic Banners
+// Top & Bottom Graphic Banners
 // ============================================================
 function TopCardBanner() {
   return (
-    <div className="absolute top-0 left-0 right-0 w-full h-28 sm:h-36 pointer-events-none overflow-hidden z-0">
+    <div className="absolute top-0 left-0 right-0 w-full h-28 sm:h-32 pointer-events-none overflow-hidden z-0">
       <img
         src="/card-top.png"
         alt=""
@@ -52,7 +52,7 @@ function TopCardBanner() {
 
 function BottomCardBanner() {
   return (
-    <div className="absolute bottom-0 left-0 right-0 w-full h-28 sm:h-36 pointer-events-none overflow-hidden z-0">
+    <div className="absolute bottom-0 left-0 right-0 w-full h-28 sm:h-32 pointer-events-none overflow-hidden z-0">
       <img
         src="/card-bottom.png"
         alt=""
@@ -71,7 +71,7 @@ function Header() {
       <h1
         className="font-bold mb-2 w-full uppercase drop-shadow-sm"
         style={{
-          fontSize: "clamp(1.35rem, 5.8vw, 2.5rem)",
+          fontSize: "clamp(1.35rem, 5.8vw, 2.2rem)",
           letterSpacing: "0.1em",
           lineHeight: 1.2,
           color: "#C8102E",
@@ -370,18 +370,25 @@ export default function Home() {
       {isPdfOpen && <PdfModal onClose={() => setIsPdfOpen(false)} />}
       {isCallModalOpen && <CallModal onClose={() => setIsCallModalOpen(false)} />}
 
-      <main className="relative flex flex-col min-h-[100dvh] bg-slate-50 selection:bg-[#C8102E]/20 selection:text-[#C8102E] overflow-x-hidden">
-        <TopCardBanner />
+      {/* Desktop Wrapper Background */}
+      <main className="min-h-screen w-full bg-slate-900 sm:bg-slate-200 flex items-center justify-center sm:py-8 sm:px-4 selection:bg-[#C8102E]/20 selection:text-[#C8102E]">
 
-        <div className="flex-1 flex flex-col w-full mx-auto relative z-10">
-          <Header />
-          <CertificationBanner />
-          <ActionCards onOpenPdf={() => setIsPdfOpen(true)} />
-          <ContactGrid onSelectCall={() => setIsCallModalOpen(true)} />
+        {/* Fixed Mobile Card Frame on PC */}
+        <div className="relative w-full max-w-md min-h-[100dvh] sm:min-h-[820px] bg-slate-50 sm:rounded-3xl sm:shadow-2xl overflow-hidden flex flex-col justify-between sm:border sm:border-slate-300">
+
+          <TopCardBanner />
+
+          <div className="flex-1 flex flex-col w-full relative z-10">
+            <Header />
+            <CertificationBanner />
+            <ActionCards onOpenPdf={() => setIsPdfOpen(true)} />
+            <ContactGrid onSelectCall={() => setIsCallModalOpen(true)} />
+          </div>
+
           <Footer />
-        </div>
 
-        <BottomCardBanner />
+          <BottomCardBanner />
+        </div>
       </main>
 
       <style jsx global>{`
